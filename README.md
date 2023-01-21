@@ -116,15 +116,9 @@ To run the project, execute the following command:
 
 To run tests, run the following command:
 
-Coming soon
-
-<!--
-Example command:
-
 ```sh
-  bin/rails test test/models/article_test.rb
+  rspec spec/models/model_name_spec.rb
 ```
---->
 
 ### Deployment
 
