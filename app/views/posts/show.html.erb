@@ -14,4 +14,15 @@ Iusto sed earum praesentium aut provident laboriosam asperiores, quisquam quasi 
 Molestiae expedita modi rem magnam fugit pariatur perferendis ab enim facilis assumenda, eaque voluptatum at aperiam omnis adipisci, illum amet ut voluptate corporis quisquam corrupti distinctio id et. Alias, perspiciatis.
 Aspernatur, cumque voluptatibus placeat consequuntur excepturi saepe voluptatum cum porro quos sunt voluptates dolores numquam neque, veritatis error totam nulla possimus corrupti iste! Omnis, quidem mollitia facilis explicabo expedita voluptas!
 Quidem dolorum ut odit labore sit mollitia sapiente repudiandae praesentium aspernatur nesciunt, quos dolore ad rem sed, tempore deserunt obcaecati iste, non magnam exercitationem voluptatibus minima? Asperiores quo sapiente et?</p>
+  
+
+  <div class="flex flex-col justify-between w-full">
+    <% @post.comments.includes(:author).includes(:post).each do |comment| %>
+    <div class="flex flex-col">
+     <p><%= comment.author.name %></p> 
+     <p><%= comment.text %></p>
+    </div>
+    <% end %> 
+  </div> 
   </div>
+
