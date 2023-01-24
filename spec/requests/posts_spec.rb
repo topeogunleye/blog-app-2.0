@@ -42,5 +42,4 @@ RSpec.describe 'Posts', type: :request do
       expect(response.body).to include('This is the show page for posts.')
     end
   end
-
 end
