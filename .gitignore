@@ -31,4 +31,5 @@
 /config/master.key
 
 /app/assets/builds/*
+# Ignore build files
 !/app/assets/builds/.keep
