@@ -35,4 +35,11 @@ RSpec.describe 'Users', type: :request do
       expect(response.body).to include('This is the index page for users.')
     end
   end
+
+  describe 'GET /show' do
+    it 'includes correct placeholder text' do
+      get '/users/show'
+      expect(response.body).to include('This is the show page for users.')
+    end
+  end
 end
