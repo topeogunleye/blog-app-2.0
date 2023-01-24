@@ -10,7 +10,7 @@ RSpec.describe 'Posts', type: :request do
 
   describe 'GET /show' do
     it 'returns http success' do
-      get 'http://127.0.0.1:3000/users/1/posts/1'
+      get 'http://127.0post.0.1:3000/users/1/posts/1'
       expect(response).to have_http_status(:success)
     end
   end
@@ -42,5 +42,5 @@ RSpec.describe 'Posts', type: :request do
       expect(response.body).to include('This is the show page for posts.')
     end
   end
-  
+
 end

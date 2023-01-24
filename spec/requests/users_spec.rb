@@ -14,4 +14,25 @@ RSpec.describe 'Users', type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe 'GET /index' do
+    it 'does not render a different template' do
+      get '/users/index'
+      expect(response).to_not render_template(:show)
+    end
+  end
+
+  describe 'GET /show' do
+    it 'does not render a different template' do
+      get '/users/show'
+      expect(response).to_not render_template(:index)
+    end
+  end
+
+  describe 'GET /index' do
+    it 'includes correct placeholder text' do
+      get '/users/index'
+      expect(response.body).to include('This is the index page for users.')
+    end
+  end
 end
