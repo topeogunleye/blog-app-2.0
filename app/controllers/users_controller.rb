@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
-  def index; end
+  def index
+    @users = User.all.order(id: :asc)
+    @posts = Post.all.order(id: :desc)
+  end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.order(id: :desc)
+  end
 end

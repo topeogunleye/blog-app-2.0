@@ -108,6 +108,10 @@ Install this project with:
 
 To run the project, execute the following command:
 
+```
+rake assets:precompile
+```
+
 ```sh
   rails server
 ```

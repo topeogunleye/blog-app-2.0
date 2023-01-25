@@ -1,2 +1,28 @@
-<h1>Posts#show</h1>
-<p>Here is a list of posts for a given user</p>
+
+  <div class="flex flex-col">
+  <div class="flex justify-between w-full">
+    <h2 class="flex text-bold text-2xl"><%= @post.title%></h2>
+    <ul class="flex justify-between w-48">
+      <li>Comments: <%= @post.comments_counter%></li>
+      <li>Likes: <%= @post.likes_counter%></li>
+    </ul>
+  </div>
+
+
+<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore sit minus odio asperiores. Tempore deleniti ut nostrum. Expedita, molestias quam aperiam animi magnam sapiente obcaecati non, in, totam distinctio incidunt.
+Iusto sed earum praesentium aut provident laboriosam asperiores, quisquam quasi adipisci voluptatum porro explicabo autem doloremque tempora obcaecati ducimus dolor molestias fuga minima repellat saepe quas exercitationem perferendis iure! Laudantium?
+Molestiae expedita modi rem magnam fugit pariatur perferendis ab enim facilis assumenda, eaque voluptatum at aperiam omnis adipisci, illum amet ut voluptate corporis quisquam corrupti distinctio id et. Alias, perspiciatis.
+Aspernatur, cumque voluptatibus placeat consequuntur excepturi saepe voluptatum cum porro quos sunt voluptates dolores numquam neque, veritatis error totam nulla possimus corrupti iste! Omnis, quidem mollitia facilis explicabo expedita voluptas!
+Quidem dolorum ut odit labore sit mollitia sapiente repudiandae praesentium aspernatur nesciunt, quos dolore ad rem sed, tempore deserunt obcaecati iste, non magnam exercitationem voluptatibus minima? Asperiores quo sapiente et?</p>
+  
+
+  <div class="flex flex-col justify-between w-full">
+    <% @post.comments.includes(:author).includes(:post).each do |comment| %>
+    <div class="flex flex-col">
+     <p><%= comment.author.name %></p> 
+     <p><%= comment.text %></p>
+    </div>
+    <% end %> 
+  </div> 
+  </div>
+
