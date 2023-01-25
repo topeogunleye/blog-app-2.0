@@ -12,15 +12,20 @@
   </div>
 
 <ul class="w-full max-w-4xl mx-auto p-6 space-y-6">
-  <% @latest_posts.each do |post| %>
+  <% @posts.each do |post| %>
   
     <li class="flex items-center justify-between flex-col w-full p-6 bg-white rounded-lg md:flex-row">
       <a href="http://127.0.0.1:3000/users/<%= post.author_id%>/posts/<%= post.id%>" class="flex w-full">
-        <div class="flex justify-between w-full"><h2 class="flex text-bold text-2xl"><%= post.title%></h2>
+        <div class="flex flex-col justify-between w-full"><h2 class="flex text-bold text-2xl"><%= post.title%></h2>
         <ul class="flex justify-between w-48">
           <li>Comments: <%= post.comments_counter%></li>
           <li>Likes: <%= post.likes_counter%></li>
         </ul>
+        <% post.latest_comments.each do |comment| %>
+          <ul class="mt-2">
+            <li><%= comment.author.name %>: <%= comment.text %></li>
+          </ul>
+        <% end %>
         </div>
       </a>
     </li>

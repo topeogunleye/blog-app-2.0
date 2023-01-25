@@ -16,9 +16,7 @@
 
 
 <ul class="w-full max-w-4xl mx-auto p-6 space-y-6">
-  <% @latest_posts.each do |post| %>
-
-  
+  <% @user.latest_posts.each do |post| %>
     <li class="flex items-center justify-between flex-col w-full p-6 bg-white rounded-lg md:flex-row">
       <a href="http://127.0.0.1:3000/users/<%=@user.id%>/posts" class="flex w-full">
         <div class="flex justify-between w-full"><h2 class="flex text-bold text-2xl"><%= post.title%></h2>
