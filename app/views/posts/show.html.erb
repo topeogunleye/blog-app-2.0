@@ -24,5 +24,12 @@ Quidem dolorum ut odit labore sit mollitia sapiente repudiandae praesentium aspe
     </div>
     <% end %> 
   </div> 
+
+  <div class="flex gap-2 items-center">
+  <%= button_to 'Like', user_likes_url(post_id: @post.id), class: "bg-blue-500 text-white p-2 my-1" %>
+  <button class="bg-blue-500 text-white p-2 my-1" type="button">
+    <%= link_to 'Comment', new_user_comment_path(post_id: @post.id) %>
+  <button>
+</div>
   </div>
 
