@@ -45,7 +45,7 @@ RSpec.describe 'User', type: :feature do
 
     it "When I click on a user, I am redirected to that user's show page." do
       click_on 'Tom'
-      expect(page).to have_content('Tom') 
+      expect(page).to have_content('Tom')
     end
   end
 end

@@ -51,11 +51,8 @@ RSpec.describe 'User', type: :feature do
     end
 
     it "When I click to see all posts, it redirects me to the user's post's index page." do
-      click_link "See More"
+      click_link 'See More'
       expect(page).to have_content('Number of posts: 1')
     end
-
   end
-
 end
-
