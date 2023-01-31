@@ -28,12 +28,34 @@ RSpec.describe 'User', type: :feature do
       expect(page).to have_content('Number of Posts: 1')
     end
 
-    it "I can see a post's title." do
+    it "I can see the user's bio." do
       expect(page).to have_content('Teacher from Mexico.')
+    end
+
+    it "I can see a post's title." do
+      expect(page).to have_content('Hello')
     end
 
     it "I can see the user's first 3 posts" do
       # Add code to create and display first 3 posts
+      expect(page).to have_content('Hello')
     end
+
+    it "I can see a button that lets me view all of a user's posts." do
+      expect(page).to have_link('See More')
+    end
+
+    it "redirects me to that post's show page when I click on users post." do
+      click_on 'Hello'
+      expect(page).to have_content('Hello')
+    end
+
+    it "When I click to see all posts, it redirects me to the user's post's index page." do
+      click_link "See More"
+      expect(page).to have_content('Number of posts: 1')
+    end
+
   end
+
 end
+
