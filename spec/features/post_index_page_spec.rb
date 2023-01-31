@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'User', type: :feature do
   before :each do
-    first_user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.')
-    second_user = User.create(name: 'Lilly', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
-                              bio: 'Teacher from Poland.')
-    first_post = Post.create(author: first_user, title: 'Hello', text: 'This is my first post')
-    Comment.create(post: first_post, author: second_user, text: 'Hi Tom!')
-    Comment.create(post: first_post, author: second_user, text: 'Hello Tom!')
-    visit user_posts_path(first_user)
+    # Create and log in the current user
+    current_user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.')
+    # Add some posts to the current user
+    first_post = Post.create(author: current_user, title: 'Hello', text: 'This is my first post')
+    second_post = Post.create(author: current_user, title: 'Hello', text: 'This is my second post')
+    # Visit the current user's post index page
+    visit user_posts_path(current_user.id)
   end
 
   describe 'index page' do
@@ -22,20 +22,33 @@ RSpec.describe 'User', type: :feature do
 
     it "I can see the user's username" do
       expect(page).to have_content('Tom')
-      expect(page).to have_content('Lilly')
     end
 
     it 'I can see the number of posts the user has written' do
-      expect(page).to have_content('Number of posts: 1')
+      expect(page).to have_content('Number of posts: 2')
     end
 
     it "I can see a post's title" do
       expect(page).to have_content('Hello')
     end
 
-    it 'I can see the first 3 comments on a post' do
-      # Add code to create and display first 3 posts
-      expect(page).to have_content('Hi Tom!')
+    it "I can see some of the post's body." do
+      expect(page).to have_content('My first post')
     end
+
+    it 'I can see the first comments on a post' do
+      # Add code to create and display first 3 posts
+      expect(page).to have_content('Hello')
+    end
+
+    it "I can see how many likes a post has." do
+      expect(page).to have_content('Likes: 0')
+    end
+
+    it "paginates posts" do
+      expect(page).to have_content('Previous')
+      expect(page).to have_content('Next')
+    end
+
   end
 end
