@@ -16,7 +16,7 @@ RSpec.describe 'User', type: :feature do
       all_images = page.all('img')
       all_images.each do |img|
         link = img[:src]
-        expect(link).to eq('https://unsplash.com/photos/F_-0BxGuVvo')
+        expect(link).to eq('/assets/img2-3b2280af3d478258894911b061e6c8002e3a687c7ad0568da200cb39dc5e35f4.jpg')
       end
     end
 
@@ -39,6 +39,13 @@ RSpec.describe 'User', type: :feature do
 
     it "I can see the user's first 3 posts" do
       # Add code to create and display first 3 posts
+      expect(page).to have_content('Tom')
+      expect(page).to have_content('Lilly')
+    end
+
+    it "When I click on a user, I am redirected to that user's show page." do
+      click_on 'Tom'
+      expect(page).to have_content('Tom') 
     end
   end
 end
