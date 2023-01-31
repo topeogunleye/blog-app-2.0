@@ -7,7 +7,7 @@ RSpec.describe 'User', type: :feature do
                                bio: 'Teacher from Mexico.')
     # Add some posts to the current user
     Post.create(author: current_user, title: 'Hello', text: 'This is my first post')
-    Post.create(author: current_user, title: 'Hello', text: 'This is my second post')
+    Post.create(author: current_user, title: 'Hallo from the other side', text: 'This is my second post')
     # Visit the current user's post index page
     visit user_posts_path(current_user.id)
   end
@@ -42,6 +42,10 @@ RSpec.describe 'User', type: :feature do
       expect(page).to have_content('Hello')
     end
 
+    it 'I can see how many comments a post has.' do
+      expect(page).to have_content('Comments: 0')
+    end
+
     it 'I can see how many likes a post has.' do
       expect(page).to have_content('Likes: 0')
     end
@@ -50,5 +54,10 @@ RSpec.describe 'User', type: :feature do
       expect(page).to have_content('Previous')
       expect(page).to have_content('Next')
     end
+
+    it "When I click on a post, it redirects me to that post's show page." do
+      click_on 'Hello'
+      expect(page).to have_content('Hello')
+    end    
   end
 end
