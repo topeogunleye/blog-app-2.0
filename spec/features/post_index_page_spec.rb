@@ -6,8 +6,8 @@ RSpec.describe 'User', type: :feature do
     current_user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
                                bio: 'Teacher from Mexico.')
     # Add some posts to the current user
-    first_post = Post.create(author: current_user, title: 'Hello', text: 'This is my first post')
-    second_post = Post.create(author: current_user, title: 'Hello', text: 'This is my second post')
+    Post.create(author: current_user, title: 'Hello', text: 'This is my first post')
+    Post.create(author: current_user, title: 'Hello', text: 'This is my second post')
     # Visit the current user's post index page
     visit user_posts_path(current_user.id)
   end
