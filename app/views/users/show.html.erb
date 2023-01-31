@@ -14,7 +14,11 @@
 
 </div>
 
-
+<div class="flex flex-col w-full bg-white rounded-lg p-6 mt-4">
+  <div class="text-bold text-lg"><%=@user.bio %></div>
+  <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis obcaecati, eius incidunt suscipit earum esse atque vel, est consequuntur nihil reiciendis culpa iusto repellendus, provident laborum id velit mollitia assumenda.
+  Cupiditate autem, eius porro aspernatur enim sequi aut facere maiores odit quisquam debitis dolorum ratione architecto inventore impedit reprehenderit assumenda commodi! Autem libero tempore ea eaque, impedit veniam voluptatibus vitae.</div>
+</div>
 <ul class="w-full max-w-4xl mx-auto p-6 space-y-6">
   <% @user.latest_posts.each do |post| %>
     <li class="flex items-center justify-between flex-col w-full p-6 bg-white rounded-lg md:flex-row">
@@ -31,7 +35,7 @@
 </ul>
 
 <div class="flex justify-center">
-<%= button_to "See More" %>
+<%= link_to "See More", user_posts_path(user_id: @user.id), class: 'bg-blue-500 rounded-sm self-center text-white p-1' %>
 </div>
 
 

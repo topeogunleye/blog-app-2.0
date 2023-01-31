@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order(id: :desc)
+    @posts = Post.all.order(id: :desc).paginate(page: params[:page], per_page: 10)
     @user = User.find(params[:user_id])
   end
 
   def show
     @post = Post.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def new
