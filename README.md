@@ -149,6 +149,12 @@ Example:
 - Twitter: [@tope_leye](https://twitter.com/tope_leye)
 - LinkedIn: [ogunleye](https://linkedin.com/in/ogunleye)
 
+👤 **Justice Bajeri**
+
+- GitHub: [Link to Github Profile](https://github.com/Strangeal)
+- Twitter: [Link to Twitter Profile](https://twitter.com/Str_angeal)
+- LinkedIn: [Link to LinkedIn Profile](https://www.linkedin.com/in/justice-bajeri-0b7211243/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
