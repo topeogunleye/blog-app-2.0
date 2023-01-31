@@ -58,6 +58,6 @@ RSpec.describe 'User', type: :feature do
     it "When I click on a post, it redirects me to that post's show page." do
       click_on 'Hello'
       expect(page).to have_content('Hello')
-    end    
+    end
   end
 end
