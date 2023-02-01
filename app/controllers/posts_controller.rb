@@ -5,12 +5,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-    @user = User.find(params[:user_id])
+    @post = Post.where(author_id: params[:user_id]).find(params[:id])
   end
 
   def new
     @post = Post.new
+    @user = current_user
+    respond_to do |format|
+      format.html { render :new, locals: { post: @post } }
+    end
   end
 
   def create
