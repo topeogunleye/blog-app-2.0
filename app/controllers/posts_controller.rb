@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order(id: :desc).paginate(page: params[:page], per_page: 10)
-    @user = User.find(params[:user_id])
+    @posts = Post.where(author_id: params[:user_id]).order(created_at: :desc).includes(:comments).paginate(page: params[:page], per_page: 10)
   end
 
   def show
