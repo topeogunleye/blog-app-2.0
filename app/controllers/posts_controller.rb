@@ -43,20 +43,31 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    respond_to do |format|
+      format.html { render :edit, locals: { post: @post } }
+    end
   end
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(post_params)
-      redirect_to @post
-    else
-      render 'edit'
+    respond_to do |format|
+      format.html do
+        if @post.update(post_params)
+          flash[:success] = 'Post updated successfully'
+          redirect_to user_posts_url
+        else
+          flash.now[:error] = 'Error: Post could not be updated'
+          render :edit, locals: { post: @post }
+        end
+      end
     end
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :text)
+    post_params = params.require(:post).permit(:user_id, :title, :text)
+    post_params[:author_id] = current_user.id
+    post_params
   end
 end
