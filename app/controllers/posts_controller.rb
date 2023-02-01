@@ -17,11 +17,23 @@ class PostsController < ApplicationController
   end
 
   def create
+    # new object from params
     @post = Post.new(post_params)
-    if @post.save
-      redirect_to @post
-    else
-      render 'new'
+
+    # respond_to block
+    respond_to do |format|
+      format.html do
+        if @post.save
+          # success message
+          flash[:success] = 'Post created successfully'
+          # redirect to index
+          redirect_to user_posts_url
+        else
+          flash.now[:error] = 'Error: Post could not be created'
+          # render new
+          render :new, locals: { post: @post }
+        end
+      end
     end
   end
 
