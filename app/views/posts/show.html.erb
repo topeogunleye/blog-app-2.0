@@ -1,46 +1,30 @@
-
-  <div class="flex flex-col">
-  <%= link_to "Back", user_posts_path, class: 'bg-gray-500 rounded-sm text-white self-start p-1 mb-2' %>
-  <div class="flex justify-between w-full">
-    <h2 class="flex text-bold text-2xl">Post #<%= post.id %> by <%= User.find(@post.author_id).name %></h2>
-    <ul class="flex justify-between w-48">
-      <li>Comments: <%= @post.comments_counter%></li>
-      <li>Likes: <%= @post.likes_counter%></li>
-    </ul>
+<%= link_to "Back", user_posts_path, class: 'bg-gray-500 rounded-sm text-white self-start p-1 mb-2' %>
+<div class="w-full flex flex-col gap-2 p-4 border-2 p-2">
+  <div>
+    <p class="text-md font-semibold">Post #<%= @post.id %> by <%= User.find(@post.author_id).name %></p>
+    <div class="w-3/6 flex items-center gap-8">
+      <p>Comments: <%= @post.comments_counter %></p>
+      <p>Likes: <%= @post.likes_counter %></p>
+    </div>
   </div>
-
-  <div class="flex flex-col">
-    <p><%= @post.title %></p>
+  <div>
+    <h2 class="text-xl font-bold"><%= @post.title %></h2>
     <p><%= @post.text %></p>
   </div>
-
-  <div class="flex flex-col">
-    <%= button_to 'Like', user_likes_url(post_id: @post.id), class: "bg-blue-500 text-white p-2 my-1" %>
-    <%= button_to 'Comment', new_user_comment_path(post_id: @post.id), class: "bg-blue-500 text-white p-2 my-1" %>
-  </div>
-
-  <div class="flex flex-col justify-between w-full">
-    <% @post.latest_comments.includes(:author).includes(:post).each do |comment| %>
-    <div class="flex flex-col">
-     <p><%= User.find(comment.author_id).name %></p> 
-     <p><%= comment.text %></p>
-    </div>
-    <div class="">
-      <% if can? :manage, comment%>
-        <%= button_to 'Delete', user_comment_path(user_id: params[:user_id], id: comment.id ), method: :delete, class: "bg-red-500 text-white p-2 my-1" %>
-      <% end %>
-    </div>
-    <% end %> 
-  </div> 
-
-  <div class="flex gap-2 items-center">
+</div>
+<div class="flex gap-2 items-center">
   <%= button_to 'Like', user_likes_url(post_id: @post.id), class: "bg-blue-500 text-white p-2 my-1" %>
   <button class="bg-blue-500 text-white p-2 my-1" type="button">
     <%= link_to 'Comment', new_user_comment_path(post_id: @post.id) %>
   <button>
 </div>
-<% if can? :manage, post %>
-  <%= button_to 'Delete', user_post_path(user_id: params[:user_id], id: post.id ), method: :delete, class: "bg-red-500 text-white p-2 my-1" %>
+<ul class="w-full flex flex-col gap-2 p-4">
+<% @post.latest_comments.each do |comment| %>
+<li class="border-2 p-2">
+  <p><%= User.find(comment.author_id).name %>: <%= comment.text %></p>
+  <% if can? :manage, comment %>
+    <%= link_to "Delete", user_comment_path(author_id: params[:author_id], id: comment.id),  method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
+</li>
 <% end %>
-  </div>
-
+</ul>
