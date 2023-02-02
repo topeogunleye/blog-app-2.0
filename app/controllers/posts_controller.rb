@@ -43,6 +43,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.likes.delete_all
     @post.destroy
+    @post.update_posts_counter
     respond_to do |format|
       format.html do
         flash[:success] = 'Post deleted successfully'
