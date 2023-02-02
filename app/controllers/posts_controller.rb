@@ -3,10 +3,12 @@ class PostsController < ApplicationController
     @posts = Post.where(author_id: params[:user_id]).order(created_at: :desc).includes(:comments).paginate(
       page: params[:page], per_page: 10
     )
+    @user = User.find(params[:user_id])
   end
 
   def show
     @post = Post.where(author_id: params[:user_id]).find(params[:id])
+    
   end
 
   def new
