@@ -1,26 +1,34 @@
 
   <div class="flex flex-col">
+  <%= link_to "Back", user_posts_path, class: 'bg-gray-500 rounded-sm text-white self-start p-1 mb-2' %>
   <div class="flex justify-between w-full">
-    <h2 class="flex text-bold text-2xl"><%= @post.title%></h2>
+    <h2 class="flex text-bold text-2xl">Post #<%= post.id %> by <%= User.find(@post.author_id).name %></h2>
     <ul class="flex justify-between w-48">
       <li>Comments: <%= @post.comments_counter%></li>
       <li>Likes: <%= @post.likes_counter%></li>
     </ul>
   </div>
 
+  <div class="flex flex-col">
+    <p><%= @post.title %></p>
+    <p><%= @post.text %></p>
+  </div>
 
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore sit minus odio asperiores. Tempore deleniti ut nostrum. Expedita, molestias quam aperiam animi magnam sapiente obcaecati non, in, totam distinctio incidunt.
-Iusto sed earum praesentium aut provident laboriosam asperiores, quisquam quasi adipisci voluptatum porro explicabo autem doloremque tempora obcaecati ducimus dolor molestias fuga minima repellat saepe quas exercitationem perferendis iure! Laudantium?
-Molestiae expedita modi rem magnam fugit pariatur perferendis ab enim facilis assumenda, eaque voluptatum at aperiam omnis adipisci, illum amet ut voluptate corporis quisquam corrupti distinctio id et. Alias, perspiciatis.
-Aspernatur, cumque voluptatibus placeat consequuntur excepturi saepe voluptatum cum porro quos sunt voluptates dolores numquam neque, veritatis error totam nulla possimus corrupti iste! Omnis, quidem mollitia facilis explicabo expedita voluptas!
-Quidem dolorum ut odit labore sit mollitia sapiente repudiandae praesentium aspernatur nesciunt, quos dolore ad rem sed, tempore deserunt obcaecati iste, non magnam exercitationem voluptatibus minima? Asperiores quo sapiente et?</p>
-  
+  <div class="flex flex-col">
+    <%= button_to 'Like', user_likes_url(post_id: @post.id), class: "bg-blue-500 text-white p-2 my-1" %>
+    <%= button_to 'Comment', new_user_comment_path(post_id: @post.id), class: "bg-blue-500 text-white p-2 my-1" %>
+  </div>
 
   <div class="flex flex-col justify-between w-full">
-    <% @post.comments.includes(:author).includes(:post).each do |comment| %>
+    <% @post.latest_comments.includes(:author).includes(:post).each do |comment| %>
     <div class="flex flex-col">
-     <p><%= comment.author.name %></p> 
+     <p><%= User.find(comment.author_id).name %></p> 
      <p><%= comment.text %></p>
+    </div>
+    <div class="">
+      <% if can? :manage, comment%>
+        <%= button_to 'Delete', user_comment_path(user_id: params[:user_id], id: comment.id ), method: :delete, class: "bg-red-500 text-white p-2 my-1" %>
+      <% end %>
     </div>
     <% end %> 
   </div> 
@@ -31,5 +39,8 @@ Quidem dolorum ut odit labore sit mollitia sapiente repudiandae praesentium aspe
     <%= link_to 'Comment', new_user_comment_path(post_id: @post.id) %>
   <button>
 </div>
+<% if can? :manage, post %>
+  <%= button_to 'Delete', user_post_path(user_id: params[:user_id], id: post.id ), method: :delete, class: "bg-red-500 text-white p-2 my-1" %>
+<% end %>
   </div>
 
