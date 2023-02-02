@@ -40,7 +40,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    Post.find(params[:id]).delete
+    @post = Post.find(params[:id])
+    @post.likes.delete_all
+    @post.destroy
+    respond_to do |format|
+      format.html do
+        flash[:success] = 'Post deleted successfully'
+        redirect_to user_posts_url
+      end
+    end
   end
 
   def edit
